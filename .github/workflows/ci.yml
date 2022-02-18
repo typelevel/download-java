@@ -32,14 +32,14 @@ jobs:
         id: download-java
         uses: ./
         with:
-          distribution: ${{ distribution }}
-          java-version: ${{ version }}
+          distribution: ${{ matrix.distribution }}
+          java-version: ${{ matrix.version }}
 
       - name: Setup Java
         uses: actions/setup-java@v2
         with:
-          distribution: ${{ distribution }}
-          java-version: ${{ version }}
+          distribution: ${{ matrix.distribution }}
+          java-version: ${{ matrix.version }}
           jdkFile: ${{ steps.download-java.outputs.jdkFile }}
 
       - run: java --version
