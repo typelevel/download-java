@@ -1,11 +1,28 @@
-name: 'Your name here'
-description: 'Provide a description here'
-author: 'Your name or organization here'
+name: 'Download Java JDK'
+description: 'Download a specific version of the Java JDK'
+author: 'Typelevel'
 inputs:
-  milliseconds: # change this
+  java-version:
+    description: 'The Java version to set up. Takes a major Java version'
     required: true
-    description: 'input description here'
-    default: 'default value if applicable'
+  distribution:
+    description: 'Java distribution. See the list of supported distributions in README file'
+    required: true
+  index:
+    description: 'The base url for the JDK index'
+    required: false
+    default: 'https://raw.githubusercontent.com/vasilmkd/jdk-index/file-index/index/'
+outputs:
+  jdkFile:
+    description: 'Filename of the downloaded archive.'
+    value: ${{ steps.download-java.outputs.jdkFile }}
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
+  using: 'composite'
+  steps:
+    - id: download-java
+      shell: bash
+      run: |
+        JDK_URL=$(curl ${{ inputs.index }}/${{ runner.os }}/${{ runner.arch }}/${{ inputs.distribution }}/${{ inputs.version }}/jdk)
+        (cd ${{ runner.temp }} && curl -O $JDK_URL)
+        JDK_FILE="${{ runner.temp }}/$(basename $JDK_URL)"
+        echo "::set-output name=jdkFile::$zip_output"
