@@ -15,15 +15,25 @@ inputs:
 outputs:
   jdkFile:
     description: 'Filename of the downloaded archive.'
-    value: ${{ steps.download-java.outputs.jdkFile }}
+    value: ${{ steps.resolve-jdk.outputs.jdkFile }}
 runs:
   using: 'composite'
   steps:
-    - id: download-java
+    - id: resolve-jdk
+      shell: bash
+      run: |
+        JDK_URL=$(curl ${{ inputs.index }}/${{ runner.os }}/${{ runner.arch }}/${{ inputs.distribution }}/${{ inputs.java-version }}/jdk)
+        JDK_FILE="${{ runner.temp }}/$(basename $JDK_URL)"
+        echo "::set-output name=jdkUrl::$JDK_URL"
+        echo "::set-output name=jdkFile::$JDK_FILE"
+    - id: cache-jdk
+      uses: actions/cache@v2
+      with:
+        path: ${{ steps.resolve-java.outputs.jdkFile }}
+        key: ${{ runner.os }}-${{ steps.resolve-java.outputs.jdkUrl }}
+    - id: download-jdk
+      if: steps.cache.outputs.cache-hit != 'true'
       shell: bash
       working-directory: ${{ runner.temp }}
       run: |
-        JDK_URL=$(curl ${{ inputs.index }}/${{ runner.os }}/${{ runner.arch }}/${{ inputs.distribution }}/${{ inputs.java-version }}/jdk)
-        curl -L -O $JDK_URL
-        JDK_FILE="${{ runner.temp }}/$(basename $JDK_URL)"
-        echo "::set-output name=jdkFile::$JDK_FILE"
+        curl -L -O ${{ steps.resolve-java.outputs.jdkUrl }}
