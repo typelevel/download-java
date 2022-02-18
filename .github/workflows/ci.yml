@@ -35,8 +35,6 @@ jobs:
           distribution: ${{ matrix.distribution }}
           java-version: ${{ matrix.version }}
 
-      - run: head ${{ steps.download-java.outputs.jdkFile }}
-
       - name: Setup Java
         uses: actions/setup-java@v2
         with:
