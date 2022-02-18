@@ -11,7 +11,7 @@ inputs:
   index:
     description: 'The base url for the JDK index'
     required: false
-    default: 'https://raw.githubusercontent.com/vasilmkd/jdk-index/file-index/index/'
+    default: 'https://raw.githubusercontent.com/typelevel/jdk-index/main/index'
 outputs:
   jdkFile:
     description: 'Filename of the downloaded archive.'
