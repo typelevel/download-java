@@ -20,4 +20,4 @@ steps:
 - run: java -version
 ```
 
-The complete list of available distributions and versions is available at [typelevel/jdk-index](https://github.com/typelevel/jdk-index/).
+Available distributions and versions are listed at [typelevel/jdk-index](https://github.com/typelevel/jdk-index/).
