@@ -21,8 +21,9 @@ runs:
   steps:
     - id: download-java
       shell: bash
+      working-directory: ${{ runner.temp }}
       run: |
         JDK_URL=$(curl ${{ inputs.index }}/${{ runner.os }}/${{ runner.arch }}/${{ inputs.distribution }}/${{ inputs.java-version }}/jdk)
-        (cd ${{ runner.temp }} && curl -L -O $JDK_URL)
+        curl -L -O $JDK_URL
         JDK_FILE="${{ runner.temp }}/$(basename $JDK_URL)"
         echo "::set-output name=jdkFile::$JDK_FILE"
