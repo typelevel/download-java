@@ -42,4 +42,4 @@ jobs:
           java-version: ${{ matrix.version }}
           jdkFile: ${{ steps.download-java.outputs.jdkFile }}
 
-      - run: java --version
+      - run: java -version
