@@ -25,4 +25,4 @@ runs:
         JDK_URL=$(curl ${{ inputs.index }}/${{ runner.os }}/${{ runner.arch }}/${{ inputs.distribution }}/${{ inputs.java-version }}/jdk)
         (cd ${{ runner.temp }} && curl -O $JDK_URL)
         JDK_FILE="${{ runner.temp }}/$(basename $JDK_URL)"
-        echo "::set-output name=jdkFile::$zip_output"
+        echo "::set-output name=jdkFile::$JDK_FILE"
