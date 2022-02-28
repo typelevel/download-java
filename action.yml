@@ -30,7 +30,7 @@ runs:
       uses: actions/cache@v2
       with:
         path: ${{ steps.resolve-java.outputs.jdkFile }}
-        key: ${{ runner.os }}-${{ steps.resolve-java.outputs.jdkUrl }}
+        key: ${{ steps.resolve-java.outputs.jdkUrl }}
     - id: download-java
       if: steps.cache.outputs.cache-hit != 'true'
       shell: bash
