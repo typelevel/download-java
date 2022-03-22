@@ -27,7 +27,7 @@ runs:
         echo "::set-output name=jdkUrl::$JDK_URL"
         echo "::set-output name=jdkFile::$JDK_FILE"
     - id: cache-java
-      uses: actions/cache@v2
+      uses: actions/cache@v3
       with:
         path: ${{ steps.resolve-java.outputs.jdkFile }}
         key: ${{ steps.resolve-java.outputs.jdkUrl }}
