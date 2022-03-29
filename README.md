@@ -6,13 +6,13 @@ A GitHub Action for downloading JDKs. JDKs are provided by [typelevel/jdk-index]
 
 ```yaml
 steps:
-- uses: actions/checkout@v2
-- uses: typelevel/download-java@v1
+- uses: actions/checkout@v3
+- uses: typelevel/download-java@v2
   id: download-java
   with:
     distribution: 'temurin'
     java-version: 17
-- uses: actions/setup-java@v2
+- uses: actions/setup-java@v3
   with:
     distribution: 'jdkfile'
     java-version: 17
