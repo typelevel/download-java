@@ -32,7 +32,7 @@ runs:
         path: ${{ steps.resolve-java.outputs.jdkFile }}
         key: ${{ steps.resolve-java.outputs.jdkUrl }}
     - id: download-java
-      if: steps.cache.outputs.cache-hit != 'true'
+      if: steps.cache-java.outputs.cache-hit != 'true'
       shell: bash
       working-directory: ${{ runner.temp }}
       run: |
