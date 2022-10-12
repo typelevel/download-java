@@ -24,8 +24,8 @@ runs:
       run: |
         JDK_URL=$(curl -L ${{ inputs.index }}/${{ runner.os }}/${{ runner.arch }}/${{ inputs.distribution }}/${{ inputs.java-version }}/jdk)
         JDK_FILE="${{ runner.temp }}/$(basename $JDK_URL)"
-        echo "::set-output name=jdkUrl::$JDK_URL"
-        echo "::set-output name=jdkFile::$JDK_FILE"
+        echo "jdkUrl=$JDK_URL" >> $GITHUB_OUTPUT
+        echo "jdkFile=$JDK_FILE" >> $GITHUB_OUTPUT
     - id: cache-java
       uses: actions/cache@v2
       with:
