@@ -1,3 +1,6 @@
+> [!WARNING]  
+> This action is deprecated. Use [actions/setup-java](https://github.com/actions/setup-java) standalone.
+
 # download-java
 
 A GitHub Action for downloading JDKs. JDKs are provided by [typelevel/jdk-index](https://github.com/typelevel/jdk-index/) and are installed with [actions/setup-java](https://github.com/actions/setup-java).
